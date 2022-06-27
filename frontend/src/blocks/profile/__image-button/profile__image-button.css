@@ -1,0 +1,14 @@
+.profile__image-button {
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin: auto;
+}
+
+
+@media (max-width: 896px)  {
+  .profile__image-button  {
+    width: 7.5px;
+		height: 7.5px;
+  }
+ }

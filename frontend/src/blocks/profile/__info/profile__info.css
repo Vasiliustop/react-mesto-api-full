@@ -1,0 +1,11 @@
+.profile__info {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+}
+
+@media (max-width: 896px)  {
+  .profile__info {
+   margin: auto;
+  }
+ }
