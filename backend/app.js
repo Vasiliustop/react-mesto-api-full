@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
@@ -15,6 +16,7 @@ const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 const app = express();
+app.use(cors({ credentials: true, origin: ['https://localhost:3001', 'https://localhost:3000', 'https://vasiliusmesto.students.nomoredomains.xyz', 'https://api.vasilius.students.nomoreparties.sbs'] }));
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
