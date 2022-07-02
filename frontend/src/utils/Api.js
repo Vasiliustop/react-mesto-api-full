@@ -79,9 +79,9 @@ export default class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://api.vasilius.students.nomoreparties.sbs",
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-38",
   headers: {
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    authorization: "d93cb8f9-43a8-4eb0-a818-f7d7f8da3b12",
     "Content-Type": "application/json",
   },
 });
