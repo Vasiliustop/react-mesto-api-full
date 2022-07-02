@@ -15,6 +15,7 @@ export default class Api {
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
+      credentials: "include",
     }).then(this._checkRequest);
   }
 
@@ -22,6 +23,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
+      credentials: "include",
       body: JSON.stringify({
         name,
         about,
@@ -32,6 +34,7 @@ export default class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
+      credentials: "include",
     }).then(this._checkRequest);
   }
 
@@ -39,6 +42,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
+      credentials: "include",
     }).then(this._checkRequest);
   }
 
@@ -46,6 +50,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
+      credentials: "include",
     }).then(this._checkRequest);
   }
 
@@ -61,6 +66,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
+      credentials: "include",
       body: JSON.stringify({
         name,
         link,
@@ -73,13 +79,14 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
+      credentials: "include",
       body: JSON.stringify(avatar),
     }).then(this._checkRequest);
   }
 }
 
 export const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-38",
+  baseUrl: "https://api.vasilius.students.nomoreparties.sbs",
   headers: {
     authorization: "d93cb8f9-43a8-4eb0-a818-f7d7f8da3b12",
     "Content-Type": "application/json",
