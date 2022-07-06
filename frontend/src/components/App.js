@@ -25,15 +25,15 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegisterCompleted, setIsRegisterCompleted] = useState(false);
-  const [email, setEmail] = useState(false);
   const history = useHistory();
+  const [email, setEmail] = useState(false);
 
   const checkToken = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
-        setEmail(res.email);
         setIsLoggedIn(true);
+        setEmail(res.email);
         history.push("/");
       });
     }
