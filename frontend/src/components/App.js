@@ -162,13 +162,12 @@ export default function App() {
   };
 
   const handleLogin = (email, password) => {
-    auth
-      .login(email, password)
+    auth.login(email, password)
       .then((res) => {
         if (res) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
-          history.push("/");
+          history.replace({ pathname: "/" });
           setEmail(email);
         }
       })
@@ -209,11 +208,6 @@ export default function App() {
             <Footer />
           </ProtectedRoute>
         </Switch>
-        <InfoTooltip
-          isOpen={isTooltipOpen}
-          isRegisterCompleted={isRegisterCompleted}
-          onClose={closeAllPopups}
-        />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
@@ -232,6 +226,11 @@ export default function App() {
         <ImagePopup
           data={selectedCard || {}}
           isOpen={selectedCard}
+          onClose={closeAllPopups}
+        />
+        <InfoTooltip
+          isOpen={isTooltipOpen}
+          isRegisterCompleted={isRegisterCompleted}
           onClose={closeAllPopups}
         />
       </div>
