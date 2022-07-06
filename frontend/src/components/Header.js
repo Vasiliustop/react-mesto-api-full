@@ -15,12 +15,12 @@ export default function Header({ email, onSignOut }) {
             </Link>
           </div>
         </Route>
-        <Route exact path="/sign-up">
+        <Route exact path="/signup">
           <Link className="header__link" to="/signin">
             Войти
           </Link>
         </Route>
-        <Route exact path="/sign-in">
+        <Route exact path="/signin">
           <Link className="header__link" to="/signup">
             Регистрация
           </Link>
