@@ -5,7 +5,7 @@ export default class Api {
   }
 
   _getHeaders() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwt');
     return {
       'Authorization': `Bearer ${token}`,
       ...this._headers,
