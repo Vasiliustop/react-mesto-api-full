@@ -168,8 +168,8 @@ export default function App() {
         if (res) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
-          setEmail(email);
           history.push("/");
+          setEmail(email);
         }
       })
       .catch((err) => {
@@ -190,12 +190,6 @@ export default function App() {
       <div className="root">
         <Header onSignOut={handleSignOut} email={email} />
         <Switch>
-          <Route path="/signup">
-            <Register onRegister={handleRegister} />
-          </Route>
-          <Route path="/signin">
-            <Login onLogin={handleLogin} />
-          </Route>
           <ProtectedRoute isLoggedIn={isLoggedIn} path="/">
             <Main
               onEditProfile={handleEditProfileClick}
@@ -209,6 +203,12 @@ export default function App() {
             <Footer />
           </ProtectedRoute>
         </Switch>
+        <Route path="/signup">
+            <Register onRegister={handleRegister} />
+          </Route>
+          <Route path="/signin">
+            <Login onLogin={handleLogin} />
+          </Route>
         <InfoTooltip
           isOpen={isTooltipOpen}
           isRegisterCompleted={isRegisterCompleted}
