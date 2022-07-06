@@ -19,13 +19,28 @@ export default function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isTooltipOpen, setTooltipOpen] = useState(false);
   const [selectedCard, setSelected] = useState(null);
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegisterCompleted, setIsRegisterCompleted] = useState(false);
-  const [isTooltipOpen, setTooltipOpen] = useState(false);
   const [email, setEmail] = useState(false);
+  const history = useHistory();
+
+  const checkToken = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth.checkToken(jwt).then((res) => {
+        setEmail(res.email);
+        setIsLoggedIn(true);
+        history.push("/");
+      });
+    }
+  };
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -128,22 +143,6 @@ export default function App() {
     setTooltipOpen(false);
     setSelected(null);
   }
-
-  const history = useHistory();
-  useEffect(() => {
-    checkToken();
-  }, []);
-
-  const checkToken = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then((res) => {
-        setEmail(res.email);
-        setIsLoggedIn(true);
-        history.push("/");
-      });
-    }
-  };
 
   const handleRegister = (email, password) => {
     auth
