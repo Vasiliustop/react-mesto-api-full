@@ -169,16 +169,12 @@ export default function App() {
         if (res) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
-          setEmail(email);
           history.push("/");
+          setEmail(email);
+          
         }
       })
-      .catch((err) => {
-        setIsRegisterCompleted(false);
-        setTooltipOpen(true);
-        console.log("err", err);
-      });
-  };
+    };
 
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
