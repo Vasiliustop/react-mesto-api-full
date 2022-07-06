@@ -3,11 +3,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
-
-const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const { login, createUser } = require('./controllers/users');
+
 const NotFoundError = require('./errors/NotFoundError');
 const handleErrors = require('./middlewares/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -18,14 +17,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 const app = express();
 app.use(cors({ credentials: true, origin: '*' }));
+app.use(bodyParser.json());
+app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(requestLogger);
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
