@@ -163,18 +163,15 @@ export default function App() {
   };
 
   const handleLogin = (email, password) => {
-    auth
-      .login(email, password)
-      .then((res) => {
-        if (res) {
-          localStorage.setItem("jwt", res.token);
-          setIsLoggedIn(true);
-          history.push("/");
-          setEmail(email);
-          
-        }
-      })
-    };
+    auth.login(email, password).then((res) => {
+      if (res) {
+        localStorage.setItem("jwt", res.token);
+        setIsLoggedIn(true);
+        history.push("/");
+        setEmail(email);
+      }
+    });
+  };
 
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
@@ -187,12 +184,6 @@ export default function App() {
       <div className="root">
         <Header onSignOut={handleSignOut} email={email} />
         <Switch>
-          <Route path="/signup">
-            <Register onRegister={handleRegister} />
-          </Route>
-          <Route path="/signin">
-            <Login onLogin={handleLogin} />
-          </Route>
           <ProtectedRoute isLoggedIn={isLoggedIn} path="/">
             <Main
               onEditProfile={handleEditProfileClick}
@@ -206,11 +197,12 @@ export default function App() {
             <Footer />
           </ProtectedRoute>
         </Switch>
-        <InfoTooltip
-          isOpen={isTooltipOpen}
-          isRegisterCompleted={isRegisterCompleted}
-          onClose={closeAllPopups}
-        />
+        <Route path="/signup">
+          <Register onRegister={handleRegister} />
+        </Route>
+        <Route path="/signin">
+          <Login onLogin={handleLogin} />
+        </Route>
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
@@ -229,6 +221,11 @@ export default function App() {
         <ImagePopup
           data={selectedCard || {}}
           isOpen={selectedCard}
+          onClose={closeAllPopups}
+        />
+        <InfoTooltip
+          isOpen={isTooltipOpen}
+          isRegisterCompleted={isRegisterCompleted}
           onClose={closeAllPopups}
         />
       </div>
