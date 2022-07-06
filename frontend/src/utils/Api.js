@@ -1,6 +1,7 @@
+const token = localStorage.getItem('jwt');
+
 export default class Api {
   constructor({ baseUrl, headers }) {
-    this._token = localStorage.getItem('jwt');
     this._headers = headers;
     this._baseUrl = baseUrl;
   }
@@ -82,7 +83,7 @@ export default class Api {
 export const api = new Api({ 
   baseUrl: "https://api.vasilius.students.nomoreparties.sbs",
   headers: {
-    authorization: `Bearer ${this._token}`,
+    authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   },
 });
