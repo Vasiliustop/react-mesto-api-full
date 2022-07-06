@@ -52,7 +52,7 @@ function Register({ onRegister }) {
             </button>
             <p className="auth__description-text">
               Уже зарегестрированны?{" "}
-              <Link type="button" className="auth__link" to="/sign-in">
+              <Link type="button" className="auth__link" to="/signin">
                 Войти
               </Link>
             </p>

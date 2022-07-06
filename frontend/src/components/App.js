@@ -138,7 +138,7 @@ export default function App() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
-        setEmail(res.data.email);
+        setEmail(res.email);
         setIsLoggedIn(true);
         history.push("/");
       });
@@ -152,7 +152,7 @@ export default function App() {
         if (res) {
           setIsRegisterCompleted(true);
           setTooltipOpen(true);
-          history.push("/sign-in");
+          history.push("/signin");
         }
       })
       .catch((err) => {
@@ -183,7 +183,7 @@ export default function App() {
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
-    history.push("/sign-in");
+    history.push("/signin");
   };
 
   return (
@@ -191,10 +191,10 @@ export default function App() {
       <div className="root">
         <Header onSignOut={handleSignOut} email={email} />
         <Switch>
-          <Route path="/sign-up">
+          <Route path="/signup">
             <Register onRegister={handleRegister} />
           </Route>
-          <Route path="/sign-in">
+          <Route path="/signin">
             <Login onLogin={handleLogin} />
           </Route>
           <ProtectedRoute isLoggedIn={isLoggedIn} path="/">

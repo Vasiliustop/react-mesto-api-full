@@ -56,7 +56,7 @@ export default function Main({
       </section>
 
       <section className="elements">
-        {cards.map((item) => (
+        {cards.length > 0 && cards.map((item) => (
           <Card
             key={item._id}
             data={item}
