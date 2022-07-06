@@ -1,16 +1,11 @@
+const token = localStorage.getItem('jwt');
+
 export default class Api {
   constructor({ baseUrl, headers }) {
     this._headers = headers;
     this._baseUrl = baseUrl;
   }
 
-  _getHeaders() {
-    const token = localStorage.getItem('jwt');
-    return {
-      'Authorization': `Bearer ${token}`,
-      ...this._headers,
-    };
-  }
 
   _checkRequest(response) {
     if (response.ok) {
@@ -22,14 +17,14 @@ export default class Api {
 
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._getHeaders,
+      headers: this._headers,
       }).then(this._checkRequest);
   }
 
   editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._getHeaders,
+      headers: this._headers,
       body: JSON.stringify({
         name,
         about,
@@ -39,35 +34,35 @@ export default class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._getHeaders,
+      headers: this._headers,
      }).then(this._checkRequest);
   }
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
-      headers: this._getHeaders,
+      headers: this._headers,
      }).then(this._checkRequest);
   }
 
   unlike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
-      headers: this._getHeaders,
+      headers: this._headers,
     }).then(this._checkRequest);
   }
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      headers: this._getHeaders,
+      headers: this._headers,
      }).then(this._checkRequest);
   }
 
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._getHeaders,
+      headers: this._headers,
       body: JSON.stringify({
         name,
         link,
@@ -79,7 +74,7 @@ export default class Api {
     //редактирование аватара
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._getHeaders,
+      headers: this._headers,
       body: JSON.stringify(avatar),
     }).then(this._checkRequest);
   }
@@ -88,6 +83,7 @@ export default class Api {
 export const api = new Api({ 
   baseUrl: "https://api.vasilius.students.nomoreparties.sbs",
   headers: {
-    'Content-Type': 'application/json'
+    authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   },
 });

@@ -169,8 +169,8 @@ export default function App() {
         if (res) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
-          history.push("/");
           setEmail(email);
+          history.push("/");
         }
       })
       .catch((err) => {
