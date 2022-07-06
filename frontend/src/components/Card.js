@@ -17,7 +17,7 @@ export default function Card({ data, onCardClick, onCardLike, onCardDelete }) {
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `elements__element-button ${
-    isLiked ? "elements__element-button_aktive" : ""
+    isLiked && "elements__element-button_aktive"
   }`;
 
   function handleLikeClick() {
